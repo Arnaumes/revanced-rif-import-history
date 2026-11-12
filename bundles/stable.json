@@ -1,0 +1,7 @@
+{
+  "created_at": "2026-11-12T23:09:26",
+  "description": "First release.\n\n- **Import history**: adds **Import history** to rif's **Settings \u2192 Backup**. Pick a backup made with\n  **Export settings AND HISTORY** and its history is added to rif's history. Items already in your history are\n  skipped and left unchanged, and nothing is removed.\n\nRequires rif is fun **5.6.22** (free or golden platinum). Patch your original APK together with the patches you\nalready use, such as the official **Spoof client** patch,\n[MojiRS/revanced-rif-patches](https://github.com/MojiRS/revanced-rif-patches) and\n[notBrian2/revanced-rif-fixes](https://github.com/notBrian2/revanced-rif-fixes).\n",
+  "download_url": "https://github.com/Arnaumes/revanced-rif-import-history/releases/download/v1.0.0/patches.rvp",
+  "signature_download_url": "N/A",
+  "version": "v1.0.0"
+}
