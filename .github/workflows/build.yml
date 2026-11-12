@@ -1,0 +1,35 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      # Also caches Gradle's dependencies and wrapper (GitHub's cache; gradle/actions' caching has its own terms).
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: 21
+          cache: gradle
+
+      - uses: gradle/actions/wrapper-validation@v6
+
+      - name: Build, lint and run the unit tests
+        run: ./gradlew build
+
+      # A single file, uploaded as is: the artifact downloads as the .rvp itself.
+      - uses: actions/upload-artifact@v7
+        with:
+          path: patches/build/libs/*.rvp
+          archive: false
+          if-no-files-found: error

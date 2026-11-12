@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Only used to build the extension DEX. The patch registers the activity in rif's own manifest. -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <application />
+</manifest>

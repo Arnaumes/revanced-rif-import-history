@@ -1,0 +1,15 @@
+# Gradle and build output
+.gradle/
+.kotlin/
+build/
+local.properties
+
+# IDEs
+.idea/
+*.iml
+.vscode/
+
+# APKs and signing keys never belong in the repository
+*.apk
+*.keystore
+*.jks

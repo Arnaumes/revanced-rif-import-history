@@ -1,0 +1,26 @@
+[versions]
+agp = "8.13.2"
+kotlin = "2.3.10"
+# ReVanced CLI 6.0.0 ships ReVanced Patcher 22, the patcher used by ReVanced Manager and the other rif bundles.
+revanced-cli = "6.0.0"
+# SHA-256 of revanced-cli-6.0.0-all.jar, checked before use (GitHub release assets can be replaced).
+revanced-cli-sha256 = "c25549bc17d59d2eb94fa5f86e60e9b77a02772ca88f7050f8f1276f923a9958"
+# The smali version ReVanced Patcher 22 is built against.
+smali = "3.0.9"
+# Provides D8, which compiles the patches to DEX so ReVanced Manager (Android) can load them.
+r8 = "8.13.19"
+junit = "4.13.2"
+androidx-test-runner = "1.6.2"
+androidx-test-ext-junit = "1.2.1"
+
+[libraries]
+revanced-cli = { module = "ReVanced:revanced-cli", version.ref = "revanced-cli" }
+smali = { module = "com.android.tools.smali:smali", version.ref = "smali" }
+r8 = { module = "com.android.tools:r8", version.ref = "r8" }
+junit = { module = "junit:junit", version.ref = "junit" }
+androidx-test-runner = { module = "androidx.test:runner", version.ref = "androidx-test-runner" }
+androidx-test-ext-junit = { module = "androidx.test.ext:junit", version.ref = "androidx-test-ext-junit" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }

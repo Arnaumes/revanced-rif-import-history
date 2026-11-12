@@ -1,0 +1,65 @@
+name: Release
+
+# Push a tag like v1.0.0 (matching `version` in gradle.properties) to publish a release.
+# Tags with a suffix, like v1.1.0-rc.1, are published as pre-releases.
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: 21
+          cache: gradle
+
+      - uses: gradle/actions/wrapper-validation@v6
+
+      - name: Check that the tag matches the version
+        run: |
+          version=$(sed -n 's/^version *= *//p' gradle.properties | tr -d '\r')
+          if [ "v$version" != "$GITHUB_REF_NAME" ]; then
+            echo "::error::Tag $GITHUB_REF_NAME doesn't match version $version in gradle.properties"
+            exit 1
+          fi
+
+      - name: Build, lint and run the unit tests
+        run: ./gradlew build
+
+      - name: Publish the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 scripts/release_notes.py "${GITHUB_REF_NAME#v}" > release-notes.md
+          # ReVanced Manager and the bundle links expect the asset to be called patches.rvp.
+          cp patches/build/libs/patches-*.rvp patches.rvp
+          prerelease=""
+          case "$GITHUB_REF_NAME" in *-*) prerelease="--prerelease" ;; esac
+          gh release create "$GITHUB_REF_NAME" patches.rvp \
+            --title "$GITHUB_REF_NAME" --notes-file release-notes.md $prerelease
+
+      # ReVanced Manager follows bundles/*.json on the default branch, so update them right away.
+      - name: Update the patch bundle links
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git fetch origin main
+          git checkout -B main origin/main
+          python3 scripts/update_bundle_json.py
+          git add bundles
+          if git diff --cached --quiet; then
+            echo "Bundle links already up to date"
+            exit 0
+          fi
+          git -c user.name="github-actions[bot]" \
+            -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+            commit -m "Update patch bundle links for $GITHUB_REF_NAME"
+          git push origin main
