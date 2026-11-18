@@ -2,6 +2,19 @@
 
 [![Build](https://github.com/Arnaumes/revanced-rif-import-history/actions/workflows/build.yml/badge.svg)](https://github.com/Arnaumes/revanced-rif-import-history/actions/workflows/build.yml)
 
+> [!IMPORTANT]
+> **This patch is now part of [MojiRS/revanced-rif-patches](https://github.com/MojiRS/revanced-rif-patches).** This
+> repository is archived and won't get updates.
+>
+> Since MojiRS's version 1.9.0, its **Fix history import** patch makes rif's **Import settings** (renamed **Import
+> settings and history**) add the backup's history too, the same way as this patch: only missing items are added,
+> and nothing is removed. The difference is that it runs as part of **Import settings**, which also replaces all
+> your settings with the ones in the backup.
+>
+> To switch: in ReVanced Manager, remove this bundle, update MojiRS's bundle to 1.9.0 or newer
+> (`https://raw.githubusercontent.com/MojiRS/revanced-rif-patches/main/bundles/stable.json`), select **Fix history
+> import** and patch again. You don't need both.
+
 A [ReVanced](https://revanced.app) patch for **rif is fun for Reddit 5.6.22**, the last release of the discontinued
 Reddit client. It works with the free app (`com.andrewshu.android.reddit`) and with **rif is fun golden platinum**
 (`com.andrewshu.android.redditdonation`).

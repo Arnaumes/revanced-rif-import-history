@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.0.1 - 2026-11-18
+
+This bundle is no longer maintained. **Import history** is now part of
+[MojiRS/revanced-rif-patches](https://github.com/MojiRS/revanced-rif-patches) 1.9.0 as **Fix history import**: rif's
+**Import settings** adds the backup's history too. Only missing items are added, and nothing is removed.
+
+To switch, remove this bundle in ReVanced Manager, update MojiRS's bundle to 1.9.0 or newer, select **Fix history
+import** and patch again. You don't need both.
+
+No other changes.
+
 ## 1.0.0 - 2026-11-11
 
 First release.
